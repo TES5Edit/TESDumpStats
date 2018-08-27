@@ -1,4 +1,5 @@
 #!/usr/bin/python3
+# -*- coding: utf-8 -*-
 #
 # BSD License and Copyright Notice ============================================
 #  Copyright (c) 2014, Lojack
@@ -104,6 +105,13 @@ officialPlugins = [x.lower()
                              'DLCHorseArmor.esp',
                              'DLCVileLair.esp',
                              'Knights.esp',
+							 'Fallout4.esm', # Fallout4
+							 'dlcrobot.esm',
+							 'dlcworkshop01.esm',
+							 'dlccoast.esm',
+							 'dlcworkshop02.esm',
+							 'dlcworkshop03.esm',
+							 'dlcnukaworld.esm',
                              )
                    for x in (y, y+'.ghost')]
 
