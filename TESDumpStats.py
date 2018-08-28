@@ -73,18 +73,18 @@ rePlugin = re.compile(r'\.es[mp](.ghost)?$', re.M|re.U|re.I)
 
 # List of official plugin names
 officialPlugins = [x.lower()
-                   for y in ('Skyrim.esm', # Skyrim
+                   for y in ('Skyrim.esm',  # Skyrim
                              'Update.esm',
                              'Dawnguard.esm', 
                              'Hearthfires.esm',
                              'Dragonborn.esm',
-                             'Fallout3.esm', # Fallout 3
+                             'Fallout3.esm',  # Fallout 3
                              'Anchorage.esm',
                              'BrokenSteel.esm',
                              'PointLookout.esm',
                              'ThePitt.esm',
                              'Zeta.esm',
-                             'FalloutNV.esm', # Fallout New Vegas
+                             'FalloutNV.esm',  # Fallout New Vegas
                              'CaravanPack.esm',
                              'ClassicPack.esm',
                              'DeadMoney.esm',
@@ -94,8 +94,8 @@ officialPlugins = [x.lower()
                              'MercenaryPack.esm',
                              'OldWorldBlues.esm',
                              'TribalPack.esm',
-                             'Oblivion.esm', # Oblivion
-                             # 'DLCShiveringIsles.esp, # dummy plugin
+                             'Oblivion.esm',  # Oblivion
+                             # 'DLCShiveringIsles.esp,  # dummy plugin
                              'DLCFrostcrag.esp',
                              'DLCBattlehornCastle.esp',
                              'DLCSpellTomes.esp',
@@ -105,7 +105,7 @@ officialPlugins = [x.lower()
                              'DLCHorseArmor.esp',
                              'DLCVileLair.esp',
                              'Knights.esp',
-							 'Fallout4.esm', # Fallout4
+							 'Fallout4.esm',  # Fallout4
 							 'dlcrobot.esm',
 							 'dlcworkshop01.esm',
 							 'dlccoast.esm',
@@ -525,7 +525,7 @@ def dumpGRUPOrRecord(ins, stats, end, progress, oblivion, headerSize):
         if not oblivion:
             version = ins.readUInt16()
             unk = ins.readUInt16()
-        if not flags & 0x20: # Not deleted
+        if not flags & 0x20:  # Not deleted
             # Data
             s = stats.setdefault(Type, dict())
             num = s.get('count', 0)
@@ -556,7 +556,7 @@ def dumpSubRecords(data, stats):
             pos += 4
             subType = data[pos:pos+4].decode('ascii')
             pos += 4
-            pos += 2 # datasize
+            pos += 2  # datasize
         else:
             subSize = struct.unpack('H', data[pos:pos+2])[0]
             pos += 2
