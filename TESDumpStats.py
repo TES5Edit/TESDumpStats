@@ -48,7 +48,7 @@
 import sys
 
 print("Running on Python {0}.{1}.{2}".format(*sys.version_info))
-if sys.version_info < (3,3):
+if sys.version_info < (3, 3):
     print("TESDumpStats requires Python 3.3 or higher.")
     sys.exit(0)
 
@@ -68,23 +68,23 @@ import io
 
 
 # Regex to find valid plugin files
-rePlugin = re.compile(r'\.es[mp](.ghost)?$', re.M|re.U|re.I)
+rePlugin = re.compile(r'\.es[mp](.ghost)?$', re.M | re.U | re.I)
 
 
 # List of official plugin names
 officialPlugins = [x.lower()
-                   for y in ('Skyrim.esm', # Skyrim
+                   for y in ('Skyrim.esm',  # Skyrim
                              'Update.esm',
-                             'Dawnguard.esm', 
+                             'Dawnguard.esm',
                              'Hearthfires.esm',
                              'Dragonborn.esm',
-                             'Fallout3.esm', # Fallout 3
+                             'Fallout3.esm',  # Fallout 3
                              'Anchorage.esm',
                              'BrokenSteel.esm',
                              'PointLookout.esm',
                              'ThePitt.esm',
                              'Zeta.esm',
-                             'FalloutNV.esm', # Fallout New Vegas
+                             'FalloutNV.esm',  # Fallout New Vegas
                              'CaravanPack.esm',
                              'ClassicPack.esm',
                              'DeadMoney.esm',
@@ -94,8 +94,8 @@ officialPlugins = [x.lower()
                              'MercenaryPack.esm',
                              'OldWorldBlues.esm',
                              'TribalPack.esm',
-                             'Oblivion.esm', # Oblivion
-                             # 'DLCShiveringIsles.esp, # dummy plugin
+                             'Oblivion.esm',  # Oblivion
+                             # 'DLCShiveringIsles.esp,  # dummy plugin
                              'DLCFrostcrag.esp',
                              'DLCBattlehornCastle.esp',
                              'DLCSpellTomes.esp',
@@ -105,14 +105,14 @@ officialPlugins = [x.lower()
                              'DLCHorseArmor.esp',
                              'DLCVileLair.esp',
                              'Knights.esp',
-							 'Fallout4.esm', # Fallout4
-							 'dlcrobot.esm',
-							 'dlcworkshop01.esm',
-							 'dlccoast.esm',
-							 'dlcworkshop02.esm',
-							 'dlcworkshop03.esm',
-							 'dlcnukaworld.esm',
-                             )
+                             'Fallout4.esm',  # Fallout4
+                             'dlcrobot.esm',
+                             'dlcworkshop01.esm',
+                             'dlccoast.esm',
+                             'dlcworkshop02.esm',
+                             'dlcworkshop03.esm',
+                             'dlcnukaworld.esm',
+                            )
                    for x in (y, y+'.ghost')]
 
 
@@ -129,7 +129,7 @@ gameFormat = {
 
 # Command line parser
 parser = argparse.ArgumentParser(prog='TESDumpStats',
-                                  add_help=True)
+                                 add_help=True)
 parser.add_argument('-a', '--a',
                     dest='all',
                     action='store_true',
@@ -305,14 +305,14 @@ def main():
     # Setup output directory/file
     timestamp = time.strftime('%Y-%m-%d_%H%M.%S')
     outDir = (opts.output if opts.output else
-              os.path.join(os.getcwd(),'TESDumpStats'))
+              os.path.join(os.getcwd(), 'TESDumpStats'))
     if opts.split:
         outDir = os.path.join(outDir, timestamp)
     try:
         if not os.path.exists(outDir):
             os.makedirs(outDir)
-        testFile = os.path.join(outDir,'test.txt')
-        with open(testFile,'wb'):
+        testFile = os.path.join(outDir, 'test.txt')
+        with open(testFile, 'wb'):
             pass
         os.remove(testFile)
     except Exception as e:
@@ -407,7 +407,7 @@ def printRecordStats(stats, outFile):
         # Subrecords
         print('  Subrecords:', file=outFile)
         for subtype in sorted(recStats):
-            if subtype in ('count','sizes','compressed'):
+            if subtype in ('count', 'sizes', 'compressed'):
                 continue
             subStats = recStats[subtype]
             subCounts = subStats['counts']
@@ -449,7 +449,7 @@ def mergeRecordStats(dest, source):
             destRecStats['compressed'] += sourceRecStats['compressed']
             # Subrecords
             for subType in sourceRecStats:
-                if subType in ('compressed','sizes','count'):
+                if subType in ('compressed', 'sizes', 'count'):
                     continue
                 if subType not in destRecStats:
                     destRecStats[subType] = sourceRecStats[subType]
@@ -525,7 +525,7 @@ def dumpGRUPOrRecord(ins, stats, end, progress, oblivion, headerSize):
         if not oblivion:
             version = ins.readUInt16()
             unk = ins.readUInt16()
-        if not flags & 0x20: # Not deleted
+        if not flags & 0x20:  # Not deleted
             # Data
             s = stats.setdefault(Type, dict())
             num = s.get('count', 0)
@@ -538,7 +538,7 @@ def dumpGRUPOrRecord(ins, stats, end, progress, oblivion, headerSize):
                 data = zlib.decompress(data[4:])
                 num += 1
             s['compressed'] = num
-            s.setdefault('sizes',[]).append(len(data))
+            s.setdefault('sizes', []).append(len(data))
             dumpSubRecords(data, s)
         # Ensure we're at the end of the record
         ins.seek(pos+dataSize+headerSize)
@@ -556,7 +556,7 @@ def dumpSubRecords(data, stats):
             pos += 4
             subType = data[pos:pos+4].decode('ascii')
             pos += 4
-            pos += 2 # datasize
+            pos += 2  # datasize
         else:
             subSize = struct.unpack('H', data[pos:pos+2])[0]
             pos += 2
@@ -566,9 +566,10 @@ def dumpSubRecords(data, stats):
         s = stats.setdefault(subType, dict())
         num = counts.get(subType,0)
         counts[subType] = num + 1
-        s.setdefault('sizes',[]).append(subSize)
+        s.setdefault('sizes', []).append(subSize)
     for subType in counts:
-        stats[subType].setdefault('counts',[]).append(counts[subType])
+        stats[subType].setdefault('counts', []).append(counts[subType])
 
-if __name__=='__main__':
+
+if __name__ == '__main__':
     main()
