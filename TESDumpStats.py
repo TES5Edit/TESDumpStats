@@ -75,7 +75,7 @@ rePlugin = re.compile(r'\.es[mp](.ghost)?$', re.M|re.U|re.I)
 officialPlugins = [x.lower()
                    for y in ('Skyrim.esm',  # Skyrim
                              'Update.esm',
-                             'Dawnguard.esm', 
+                             'Dawnguard.esm',
                              'Hearthfires.esm',
                              'Dragonborn.esm',
                              'Fallout3.esm',  # Fallout 3
@@ -105,14 +105,14 @@ officialPlugins = [x.lower()
                              'DLCHorseArmor.esp',
                              'DLCVileLair.esp',
                              'Knights.esp',
-							 'Fallout4.esm',  # Fallout4
-							 'dlcrobot.esm',
-							 'dlcworkshop01.esm',
-							 'dlccoast.esm',
-							 'dlcworkshop02.esm',
-							 'dlcworkshop03.esm',
-							 'dlcnukaworld.esm',
-                             )
+                             'Fallout4.esm',  # Fallout4
+                             'dlcrobot.esm',
+                             'dlcworkshop01.esm',
+                             'dlccoast.esm',
+                             'dlcworkshop02.esm',
+                             'dlcworkshop03.esm',
+                             'dlcnukaworld.esm',
+                            )
                    for x in (y, y+'.ghost')]
 
 
@@ -129,7 +129,7 @@ gameFormat = {
 
 # Command line parser
 parser = argparse.ArgumentParser(prog='TESDumpStats',
-                                  add_help=True)
+                                 add_help=True)
 parser.add_argument('-a', '--a',
                     dest='all',
                     action='store_true',
@@ -569,6 +569,7 @@ def dumpSubRecords(data, stats):
         s.setdefault('sizes',[]).append(subSize)
     for subType in counts:
         stats[subType].setdefault('counts',[]).append(counts[subType])
+
 
 if __name__=='__main__':
     main()
