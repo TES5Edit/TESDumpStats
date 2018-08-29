@@ -68,7 +68,7 @@ import io
 
 
 # Regex to find valid plugin files
-rePlugin = re.compile(r'\.es[mp](.ghost)?$', re.M | re.U | re.I)
+rePlugin = re.compile(r'\.es[lmp](.ghost)?$', re.M | re.U | re.I)
 
 
 # List of official plugin names
