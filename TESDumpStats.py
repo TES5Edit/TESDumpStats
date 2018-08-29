@@ -471,19 +471,19 @@ def printStats(stats, outDir, opts):
         mode = 'w'
     allstats = dict()
     for plugin in stats:
+        pstats = stats[plugin]
+        recStats = pstats['records']
         if opts.split:
             outName = os.path.join(outDir, plugin+'.txt')
         with open(outName, mode) as outFile:
             print(plugin, file=outFile)
-            pstats = stats[plugin]
             print(' File Size:', formatSize(pstats['size']), file=outFile)
             print(' File Date:',
                   datetime.datetime.fromtimestamp(pstats['time']),
                   file=outFile)
             print(' File CRC: 0x%X' % pstats['crc'], file=outFile)
-            recStats = pstats['records']
             printRecordStats(recStats, outFile)
-            mergeRecordStats(allstats, recStats)
+        mergeRecordStats(allstats, recStats)
     if len(stats) > 1:
         if opts.split:
             outName = os.path.join(outDir, 'combined_stats.txt')
